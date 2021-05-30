@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        //Set the JavaScript language version for emitted JavaScript and include compatible library declarations
+        "target": "ES2018",
+        //Specify an output folder for all emitted files
+        "outDir": "./dist",
+        "rootDir": "./src",
+        //CommonJS module is a reusable piece of JavaScript that exports specific objects made available to any dependent code
+        "module": "commonjs"
+    }
+}
+
