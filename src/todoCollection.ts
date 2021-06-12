@@ -36,5 +36,14 @@ export class TodoCollection {
             todoItem.complete = complete;
         }
     }
+
+    removeComplete() {
+        this.itemMap.forEach(item => {
+            if(item.complete) {
+                // (method) Map<number, TodoItem>.delete(key: number): boolean
+                this.itemMap.delete(item.id);
+            }
+        })
+    }   
 }
 
