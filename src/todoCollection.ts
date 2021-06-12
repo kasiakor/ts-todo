@@ -24,6 +24,12 @@ export class TodoCollection {
         return this.itemMap.get(id);
         //return this.todoItems.find(item => item.id === id);
     }
+
+    getTodoItems(includeComplete: boolean) : TodoItem[] {
+        // values are TodoItem[]
+        // spread operator to create an array
+        return [...this.itemMap.values()].filter(item => includeComplete || !item.complete);
+    }
     markComplete(id: number, complete: boolean) {
         const todoItem = this.getToDoById(id);
         if(todoItem) {

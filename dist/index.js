@@ -10,12 +10,14 @@ let todos = [
 let collection = new todoCollection_1.TodoCollection("Gia", todos);
 console.clear();
 console.log(`${collection.userName}'s Todo List`);
-let newTaskId = collection.addTodo("go to bank");
+// let newTaskId: number = collection.addTodo("go to bank");
 // returns number "1"
-console.log(newTaskId);
-let newTask = collection.getToDoById(newTaskId);
+// console.log(newTaskId);
+// let newTask: TodoItem = collection.getToDoById(newTaskId);
 // returns first item with passed id
 // TodoItem { id: 1, task: 'buy flour', complete: false }
-console.log(newTask);
-newTask.printDetails();
+// console.log(newTask);
+// newTask.printDetails();
 // collection.addTodo(newTaskId);
+// getTodoItems = TodoItem[]
+collection.getTodoItems(true).forEach(item => item.printDetails());
