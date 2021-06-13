@@ -1,5 +1,11 @@
 import  { TodoItem } from "./todoItem";
 
+// shape type - property name and data type
+type ItemsCount = {
+    total: number,
+    incomplete: number
+}
+
 export class TodoCollection {
     private nextId: number = 1;
 
@@ -38,12 +44,21 @@ export class TodoCollection {
     }
 
     removeComplete() {
+        // (method) Map<number, TodoItem>.forEach(callbackfn: (value: TodoItem, key: number, map: Map<number, TodoItem>)
         this.itemMap.forEach(item => {
             if(item.complete) {
                 // (method) Map<number, TodoItem>.delete(key: number): boolean
                 this.itemMap.delete(item.id);
             }
         })
-    }   
+    } 
+    
+    getItemsCount(): ItemsCount {
+        // returns object that describes the items in the collection 
+        return {
+            total: this.itemMap.size,
+            incomplete: this.getTodoItems(false).length
+        };
+    }
 }
 
