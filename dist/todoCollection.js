@@ -36,12 +36,21 @@ class TodoCollection {
         }
     }
     removeComplete() {
+        // (method) Map<number, TodoItem>.forEach(callbackfn: (value: TodoItem, key: number, map: Map<number, TodoItem>)
         this.itemMap.forEach(item => {
             if (item.complete) {
                 // (method) Map<number, TodoItem>.delete(key: number): boolean
                 this.itemMap.delete(item.id);
             }
         });
+    }
+    getItemsCount() {
+        // returns object that describes the items in the collection
+        // getItemsCount().total, getItemsCount().incomplete
+        return {
+            total: this.itemMap.size,
+            incomplete: this.getTodoItems(false).length
+        };
     }
 }
 exports.TodoCollection = TodoCollection;

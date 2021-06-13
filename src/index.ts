@@ -9,7 +9,7 @@ let todos: TodoItem[]  = [
 let collection: TodoCollection = new TodoCollection("Gia", todos);
 
 console.clear();
-console.log(`${collection.userName}'s Todo List`);
+console.log(`${collection.userName}'s Todo List` + ` (${collection.getItemsCount().incomplete} items to do)`);
 
 // let newTaskId: number = collection.addTodo("go to bank");
 // returns number "1"

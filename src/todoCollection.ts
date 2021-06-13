@@ -54,7 +54,8 @@ export class TodoCollection {
     } 
     
     getItemsCount(): ItemsCount {
-        // returns object that describes the items in the collection 
+        // returns object that describes the items in the collection
+        // getItemsCount().total, getItemsCount().incomplete
         return {
             total: this.itemMap.size,
             incomplete: this.getTodoItems(false).length
