@@ -33,6 +33,7 @@ function promptUser() {
         message: "Choose option",
         // (Array|Function) Choices array or a function returning a choices array
         choices: Object.values(Commands)
+        // Object literal may only specify known properties, and 'badProperty' does not exist in type 'ListQuestion' : badProperty: true
     }).then(answer => {
         // inquirer.prompt(questions, answers) -> promise
         // answers (object) contains values of already answered questions. Inquirer will avoid asking answers already provided here. 
