@@ -9,15 +9,17 @@ let todos = [
 ];
 // TodoCollection - userName, tasks []
 let collection = new todoCollection_1.TodoCollection("Gia", todos);
+let showCompleted = true;
 console.clear();
-collection.removeComplete();
+//collection.removeComplete();
 function displayTodoList() {
     console.log(`${collection.userName}'s Todo List` + ` (${collection.getItemsCount().incomplete} items to do)`);
-    collection.getTodoItems(true).forEach(item => item.printDetails());
+    collection.getTodoItems(showCompleted).forEach(item => item.printDetails());
 }
 // assigns names to values
 var Commands;
 (function (Commands) {
+    Commands["Toggle"] = "Show/Hide Completed";
     Commands["Quit"] = "Quit";
 })(Commands || (Commands = {}));
 function promptUser() {
@@ -37,8 +39,12 @@ function promptUser() {
     }).then(answer => {
         // inquirer.prompt(questions, answers) -> promise
         // answers (object) contains values of already answered questions. Inquirer will avoid asking answers already provided here. 
-        if (answer["command"] !== Commands.Quit) {
-            promptUser();
+        switch (answer["command"]) {
+            case Commands.Toggle:
+                showCompleted = !showCompleted;
+                promptUser();
+                console.log("hi");
+                break;
         }
     });
 }
