@@ -17,14 +17,16 @@ export class TodoCollection {
         todoItems.forEach(item => this.itemMap.set(item.id, item));
     }
 
-    addTodo(task: string) : number {
+    addTodo(task: string): number {
         while (this.getToDoById(this.nextId)) {
+           
             return this.nextId++;
         }
-        // this.todoItems.push(new TodoItem (this.nextId, task));
         this.itemMap.set(this.nextId, new TodoItem(this.nextId, task));
+        // this.todoItems.push(new TodoItem (this.nextId, task));
         return this.nextId;
     }
+
     getToDoById(id: number) : TodoItem {
         // (method) Map<number, TodoItem>.get(key: number): TodoItem
         return this.itemMap.get(id);
@@ -36,6 +38,7 @@ export class TodoCollection {
         // spread operator to create an array
         return [...this.itemMap.values()].filter(item => includeComplete || !item.complete);
     }
+
     markComplete(id: number, complete: boolean) {
         const todoItem = this.getToDoById(id);
         if(todoItem) {
@@ -61,5 +64,7 @@ export class TodoCollection {
             incomplete: this.getTodoItems(false).length
         };
     }
+
+    display
 }
 
