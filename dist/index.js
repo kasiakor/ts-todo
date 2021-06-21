@@ -13,30 +13,52 @@ let showCompleted = true;
 var Commands;
 (function (Commands) {
     Commands["Add"] = "Add New Task";
+    Commands["Complete"] = "Complete Task";
     Commands["Toggle"] = "Show/Hide Completed";
+    Commands["Purge"] = "Remove Completed Tasks";
     Commands["Quit"] = "Quit";
 })(Commands || (Commands = {}));
 //The callback to execute when the Promise is resolved .then()
 function promptAdd() {
-    // console.clear();
+    console.clear();
     inquirer.prompt({
         type: "input",
         name: "add",
         message: "Add a new task:"
     }).then(answers => {
-        var obj = answers.add;
-        //promptUser(); 
-        //console.log(answers);
-        if (obj) {
-            //collection.addTodo(answers.add);
-            console.log(collection.addTodo(obj));
-            console.log(collection.todoItems);
+        if (answers["add"] !== "") {
+            collection.addTodo(answers["add"]);
         }
+        promptUser();
     });
 }
-promptUser();
+function promptComplete() {
+    console.clear();
+    displayTodoList();
+    inquirer.prompt({
+        // A question object is a hash containing question related values:
+        // Type of the prompt
+        type: "checkbox",
+        // The name to use when storing the answer in the answers hash
+        name: "complete",
+        // The question to print
+        message: "Mark Tasks Complete",
+        // (Array|Function) Choices array or a function returning a choices array
+        choices: collection.getTodoItems(showCompleted).map(item => ({ name: item.task, value: item.id, checked: item.complete }))
+        // Object literal may only specify known properties, and 'badProperty' does not exist in type 'ListQuestion' : badProperty: true
+    }).then(answers => {
+        // inquirer.prompt(questions, answers) -> promise
+        // answers (object) contains values of already answered questions. Inquirer will avoid asking answers already provided here.
+        let completedTasks = answers["complete"];
+        // include completed tasks
+        collection.getTodoItems(true).forEach(item => 
+        // markComplete(id: number, complete: boolean) 
+        collection.markComplete(item.id, completedTasks.find(id => id === item.id) != undefined));
+        promptUser();
+    });
+}
 function promptUser() {
-    // console.clear();
+    console.clear();
     displayTodoList();
     inquirer.prompt({
         // A question object is a hash containing question related values:
@@ -61,9 +83,25 @@ function promptUser() {
                 promptAdd();
                 console.log(collection.todoItems);
                 break;
+            case Commands.Complete:
+                // getItemsCount().total, getItemsCount().incomplete
+                if (collection.getItemsCount().incomplete > 0) {
+                    promptComplete();
+                }
+                else {
+                    promptUser();
+                }
+                console.log("complete called");
+                break;
+            case Commands.Purge:
+                collection.removeComplete();
+                console.log("purge called");
+                promptUser();
+                break;
         }
     });
 }
+promptUser();
 function displayTodoList() {
     //console.log(`${collection.userName}'s Todo List` + ` (${collection.getItemsCount().incomplete} items to do)`);
     collection.getTodoItems(showCompleted).forEach(item => item.printDetails());
