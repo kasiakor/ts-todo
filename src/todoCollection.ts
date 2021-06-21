@@ -9,8 +9,8 @@ type ItemsCount = {
 export class TodoCollection {
     private nextId: number = 1;
 
-    // var Map: MapConstructor, new () => Map<any, any> 
-    private itemMap = new Map<number, TodoItem>(); 
+    // property can be accessed by the class or its subclasses
+    protected itemMap = new Map<number, TodoItem>(); 
 
     constructor(public userName: string, public todoItems: TodoItem[] = []) {
         // (method) Map<number, TodoItem>.set(key: number, value: TodoItem): Map<number, TodoItem>
@@ -65,6 +65,6 @@ export class TodoCollection {
         };
     }
 
-    display
+    
 }
 

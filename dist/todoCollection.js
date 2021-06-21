@@ -6,7 +6,7 @@ class TodoCollection {
         this.userName = userName;
         this.todoItems = todoItems;
         this.nextId = 1;
-        // var Map: MapConstructor, new () => Map<any, any> 
+        // property can be accessed by the class or its subclasses
         this.itemMap = new Map();
         // (method) Map<number, TodoItem>.set(key: number, value: TodoItem): Map<number, TodoItem>
         todoItems.forEach(item => this.itemMap.set(item.id, item));

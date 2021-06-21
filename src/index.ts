@@ -1,13 +1,16 @@
 import { TodoItem } from "./todoItem";
 import { TodoCollection } from "./todoCollection";
 import * as inquirer from "inquirer";
+import { JsonTodoCollection } from "./jsonTodoCollection";
 
 // TodoItem - id, task, complete
 let todos: TodoItem[]  = [
     new TodoItem (1, "buy flour"),  new TodoItem (2, "write a letter", true), new TodoItem (3, "call my sister")];
 
 // TodoCollection - userName, tasks []
-let collection: TodoCollection = new TodoCollection("Gia", todos);
+// let collection: TodoCollection = new TodoCollection("Gia", todos);
+
+let collection: TodoCollection = new JsonTodoCollection("Gia", todos);
 let showCompleted: boolean = true;
 
 
